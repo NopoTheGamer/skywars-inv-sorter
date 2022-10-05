@@ -1,9 +1,12 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
     idea
     java
     id("gg.essential.loom") version "0.10.0.+"
     id("dev.architectury.architectury-pack200") version "0.1.3"
     id("com.github.johnrengelman.shadow") version "7.1.2"
+    kotlin("jvm") version "1.7.20"
 }
 
 group = "com.example.archloomtemplate"
@@ -23,17 +26,17 @@ loom {
             property("mixin.debug", "true")
             property("asmhelper.verbose", "true")
             arg("--tweakClass", "org.spongepowered.asm.launch.MixinTweaker")
-            arg("--mixin", "mixins.examplemod.json")
+            arg("--mixin", "mixins.nopopvpmod.json")
         }
     }
     forge {
         pack200Provider.set(dev.architectury.pack200.java.Pack200Adapter())
         // If you don't want mixins, remove this lines
-        mixinConfig("mixins.examplemod.json")
+        mixinConfig("mixins.nopopvpmod.json")
     }
     // If you don't want mixins, remove these lines
     mixin {
-        defaultRefmapName.set("mixins.examplemod.refmap.json")
+        defaultRefmapName.set("mixins.nopopvpmod.refmap.json")
     }
 }
 
@@ -67,6 +70,7 @@ dependencies {
 
     // If you don't want to log in with your real minecraft account, remove this line
     runtimeOnly("me.djtheredstoner:DevAuth-forge-legacy:1.1.0")
+    implementation(kotlin("stdlib-jdk8"))
 
 }
 
@@ -77,14 +81,14 @@ tasks.withType(JavaCompile::class) {
 }
 
 tasks.withType(Jar::class) {
-    archiveBaseName.set("examplemod")
+    archiveBaseName.set("nopopvpmod")
     manifest.attributes.run {
         this["FMLCorePluginContainsFMLMod"] = "true"
         this["ForceLoadAsMod"] = "true"
 
         // If you don't want mixins, remove these lines
         this["TweakClass"] = "org.spongepowered.asm.launch.MixinTweaker"
-        this["MixinConfigs"] = "mixins.examplemod.json"
+        this["MixinConfigs"] = "mixins.nopopvpmod.json"
     }
 }
 
@@ -105,8 +109,16 @@ tasks.shadowJar {
     }
 
     // If you want to include other dependencies and shadow them, you can relocate them in here
-    fun relocate(name: String) = relocate(name, "com.examplemod.deps.$name")
+    fun relocate(name: String) = relocate(name, "com.nopopvpmod.deps.$name")
 }
 
 tasks.assemble.get().dependsOn(tasks.remapJar)
 
+val compileKotlin: KotlinCompile by tasks
+compileKotlin.kotlinOptions {
+    jvmTarget = "1.8"
+}
+val compileTestKotlin: KotlinCompile by tasks
+compileTestKotlin.kotlinOptions {
+    jvmTarget = "1.8"
+}
