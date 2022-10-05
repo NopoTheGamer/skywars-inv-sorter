@@ -39,8 +39,8 @@ public class SlotBind {
 
         System.out.println(slotClickEvent.slotId);
 
-        if (slotClickEvent.clickType == 1 &&
-                locked.boundTo != -1) {
+        if (locked.boundTo == -1) return;
+        if (slotClickEvent.clickType == 1) {
             Slot boundSlot = slotClickEvent.guiContainer.inventorySlots.getSlotFromInventory(
                     Minecraft.getMinecraft().thePlayer.inventory,
                     locked.boundTo
@@ -54,14 +54,16 @@ public class SlotBind {
 
             int from, to;
             int id = slotClickEvent.slotId;
-            if ((id >= 9 || slotClickEvent.guiContainer instanceof GuiChest) && 0 <= locked.boundTo && locked.boundTo <= 8) {
+            if ((id <= 35 || (slotClickEvent.guiContainer instanceof GuiChest && id < 54)) && 0 <= locked.boundTo && locked.boundTo <= 8) {
                 from = id;
                 to = locked.boundTo;
                 //boundLocked.boundTo = id;
-            } else if (((0 <= id && id < 8) || (id > 35 && id < 40)) && locked.boundTo <= 39) {
+            } else if (((0 <= id && id < 8)) && locked.boundTo <= 39) {
                 from = boundSlot.slotNumber;
                 to = id;
-            } else {
+            } else if (false) {
+                //TODO: armour stuff
+            }else {
                 return;
             }
             System.out.println("from: " + from);

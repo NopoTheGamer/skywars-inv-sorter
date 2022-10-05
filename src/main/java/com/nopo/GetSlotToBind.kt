@@ -1,7 +1,5 @@
 package com.nopo
 
-import net.minecraft.client.gui.inventory.GuiChest
-import net.minecraft.client.gui.inventory.GuiContainer
 import net.minecraft.init.Blocks
 import net.minecraft.init.Items
 import net.minecraft.inventory.Slot
@@ -9,12 +7,13 @@ import net.minecraft.item.Item
 
 fun getSlotToBind(slot: Slot): Int {
     val item = slot.stack?.item ?: return -1
-    if (item == Item.getItemFromBlock(Blocks.stone)) return 8
-    else if (item == getSword(item)) return 3
-    else if (item == getThrowable(item)) return 2
-    else if (item == Items.potionitem) return 0
-    else if (item == Items.bow) return 4
-    else return -1
+    return if (item == getBlock(item)) 8
+    else if (item == getSword(item)) 3
+    else if (item == getThrowable(item)) 2
+    else if (item == Items.potionitem) 0
+    else if (item == Items.bow) 4
+    else if (item == Items.diamond_chestplate) 38
+    else -1
 }
 
 fun getSword(item: Item?): Item? {
@@ -37,10 +36,20 @@ fun getThrowable(item: Item?): Item? {
 }
 
 fun getBlock(item: Item?): Item? {
-    val a = when (item) {
+    return when (item) {
         Item.getItemFromBlock(Blocks.stone) -> item
+        Item.getItemFromBlock(Blocks.planks) -> item
         else -> null
     }
-    println(a)
-    return null
+}
+
+fun isChestplate(item: Item?): Boolean {
+    return when (item) {
+        Items.diamond_chestplate -> true
+        Items.iron_chestplate -> true
+        Items.golden_chestplate -> true
+        Items.chainmail_chestplate -> true
+        Items.leather_chestplate -> true
+        else -> false
+    }
 }
