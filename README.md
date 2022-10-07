@@ -6,7 +6,7 @@ The command is **/skywarssorter**
 
 Swords/axes look for the tier before replacing
 
-(wood, stone, gold, iron, diamond)
+(wood -> stone -> gold -> iron -> diamond)
 
 Wooden axe will replace another wooden axe
 
@@ -19,3 +19,6 @@ Video showing it off (every click was a shift click):
 
 https://user-images.githubusercontent.com/40329022/194473230-f7480291-041d-40da-ba66-622692c6c13b.mp4
 
+(As far as I'm aware) This is not a cheat!!
+
+I am using the vanilla number key functionality and everything is possible in vanilla 
