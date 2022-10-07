@@ -1,11 +1,11 @@
 [
   {
-	"modid": "nopopvpmod",
-	"name": "slot binderere",
-	"description": "A mod that is used as an example.",
-	"version": "1.0.0",
+	"modid": "skywars-sorter",
+	"name": "Skywars Sorter",
+	"description": "A mod that sorts your inventory for skywars",
+	"version": "1.0",
 	"mcversion": "1.8.9",
-	"url": "https://github.com/romangraef/Forge1.8.9Template/",
+	"url": "https://github.com/NopoTheGamer/skywars-inv-sorter",
 	"updateUrl": "",
 	"authorList": [
 	  "nopo"

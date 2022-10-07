@@ -22,12 +22,5 @@ public abstract class MixinGuiContainer extends GuiScreen {
             ci.cancel();
             return;
         }
-        /*if (event.usePickblockInstead) {
-            $this.mc.playerController.windowClick(
-                    $this.inventorySlots.windowId,
-                    slotId, 2, 3, $this.mc.thePlayer
-            );
-            ci.cancel();
-        }*/
     }
 }

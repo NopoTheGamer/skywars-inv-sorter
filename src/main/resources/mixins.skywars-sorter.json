@@ -1,6 +1,6 @@
 {
   "package": "com.nopo.mixin",
-  "refmap": "mixins.nopopvpmod.refmap.json",
+  "refmap": "mixins.skywars-sorter.refmap.json",
   "minVersion": "0.7",
   "compatibilityLevel": "JAVA_8",
   "mixins": [

@@ -26,17 +26,17 @@ loom {
             property("mixin.debug", "true")
             property("asmhelper.verbose", "true")
             arg("--tweakClass", "org.spongepowered.asm.launch.MixinTweaker")
-            arg("--mixin", "mixins.nopopvpmod.json")
+            arg("--mixin", "mixins.skywars-sorter.json")
         }
     }
     forge {
         pack200Provider.set(dev.architectury.pack200.java.Pack200Adapter())
         // If you don't want mixins, remove this lines
-        mixinConfig("mixins.nopopvpmod.json")
+        mixinConfig("mixins.skywars-sorter.json")
     }
     // If you don't want mixins, remove these lines
     mixin {
-        defaultRefmapName.set("mixins.nopopvpmod.refmap.json")
+        defaultRefmapName.set("mixins.skywars-sorter.refmap.json")
     }
 }
 
@@ -51,6 +51,7 @@ repositories {
     maven("https://repo.spongepowered.org/maven/")
     // If you don't want to log in with your real minecraft account, remove this line
     maven("https://pkgs.dev.azure.com/djtheredstoner/DevAuth/_packaging/public/maven/v1")
+    maven(url = "https://repo.essential.gg/repository/maven-public")
 }
 
 val shadowImpl: Configuration by configurations.creating {
@@ -71,6 +72,8 @@ dependencies {
     // If you don't want to log in with your real minecraft account, remove this line
     runtimeOnly("me.djtheredstoner:DevAuth-forge-legacy:1.1.0")
     implementation(kotlin("stdlib-jdk8"))
+    shadowImpl("gg.essential:loader-launchwrapper:1.1.3")
+    implementation("gg.essential:essential-1.8.9-forge:3662")
 
 }
 
@@ -81,14 +84,14 @@ tasks.withType(JavaCompile::class) {
 }
 
 tasks.withType(Jar::class) {
-    archiveBaseName.set("nopopvpmod")
+    archiveBaseName.set("skywars-sorter")
     manifest.attributes.run {
         this["FMLCorePluginContainsFMLMod"] = "true"
         this["ForceLoadAsMod"] = "true"
 
         // If you don't want mixins, remove these lines
         this["TweakClass"] = "org.spongepowered.asm.launch.MixinTweaker"
-        this["MixinConfigs"] = "mixins.nopopvpmod.json"
+        this["MixinConfigs"] = "mixins.skywars-sorter.json"
     }
 }
 
@@ -109,7 +112,7 @@ tasks.shadowJar {
     }
 
     // If you want to include other dependencies and shadow them, you can relocate them in here
-    fun relocate(name: String) = relocate(name, "com.nopopvpmod.deps.$name")
+    fun relocate(name: String) = relocate(name, "com.skywars-sorter.deps.$name")
 }
 
 tasks.assemble.get().dependsOn(tasks.remapJar)

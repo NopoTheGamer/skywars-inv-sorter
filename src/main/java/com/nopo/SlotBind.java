@@ -6,6 +6,9 @@ import net.minecraft.client.gui.inventory.GuiChest;
 import net.minecraft.inventory.Slot;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
+import static com.nopo.UtilsKt.getSlotToBind;
+import static com.nopo.UtilsKt.shouldBeEnabled;
+
 public class SlotBind {
 
     private static final SlotBind INSTANCE = new SlotBind();
@@ -25,19 +28,12 @@ public class SlotBind {
 
     public int slot1 = -1;
 
-    /**
-     * Hotbar 0-8
-     * <p>
-     * Inv 9-35
-     * <p>
-     * Armor 36-39 (36 being boots)
-    */
 
     @SubscribeEvent
     public void onWindowClick(SlotClickEvent slotClickEvent) {
-        LockedSlot locked = new LockedSlot(GetSlotToBindKt.getSlotToBind(slotClickEvent.slot));
+        if (!shouldBeEnabled()) return;
 
-        System.out.println(slotClickEvent.slotId);
+        LockedSlot locked = new LockedSlot(getSlotToBind(getSlotToBind(slotClickEvent.slot), slotClickEvent));
 
         if (locked.boundTo == -1) return;
         if (slotClickEvent.clickType == 1) {
@@ -45,28 +41,21 @@ public class SlotBind {
                     Minecraft.getMinecraft().thePlayer.inventory,
                     locked.boundTo
             );
-
-            if (boundSlot == null) {
-                return;
-            }
-
-            //LockedSlot boundLocked = new LockedSlot(36);
+            if (boundSlot == null) return;
 
             int from, to;
             int id = slotClickEvent.slotId;
             if ((id <= 35 || (slotClickEvent.guiContainer instanceof GuiChest && id < 54)) && 0 <= locked.boundTo && locked.boundTo <= 8) {
                 from = id;
                 to = locked.boundTo;
-                //boundLocked.boundTo = id;
+
             } else if (((0 <= id && id < 8)) && locked.boundTo <= 39) {
                 from = boundSlot.slotNumber;
                 to = id;
-            } else if (false) {
-                //TODO: armour stuff
-            }else {
+
+            } else {
                 return;
             }
-            System.out.println("from: " + from);
             Minecraft.getMinecraft().playerController.windowClick(
                     slotClickEvent.guiContainer.inventorySlots.windowId,
                     from, to, 2, Minecraft.getMinecraft().thePlayer

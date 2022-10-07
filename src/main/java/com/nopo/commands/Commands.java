@@ -24,7 +24,7 @@ import net.minecraftforge.client.ClientCommandHandler;
 public class Commands {
 	public Commands() {
 
-		ClientCommandHandler.instance.registerCommand(new TestCommand());
+		ClientCommandHandler.instance.registerCommand(new ConfigCommand());
 
 	}
 }

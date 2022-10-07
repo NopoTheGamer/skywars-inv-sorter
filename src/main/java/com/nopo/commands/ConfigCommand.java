@@ -19,21 +19,18 @@
 
 package com.nopo.commands;
 
-import com.nopo.SlotBind;
-import net.minecraft.client.Minecraft;
+import com.nopo.SkywarsSorter;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
-import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.EnumChatFormatting;
 
-public class TestCommand extends ClientCommandBase {
+public class ConfigCommand extends ClientCommandBase {
 
-	public TestCommand() {
-		super("test");
+	public ConfigCommand() {
+		super("skywarssorter");
 	}
 
 	@Override
 	public void processCommand(ICommandSender sender, String[] args) throws CommandException {
-		SlotBind.getInstance().slot1 = Integer.parseInt(args[0]);
+		SkywarsSorter.INSTANCE.display = SkywarsSorter.config.gui();
 	}
 }
