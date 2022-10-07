@@ -2,6 +2,8 @@
 
 The command is **/skywarssorter**
 
+**The mod WILL crash if you dont have another mod with essential installed, I recommend yall to be using patcher**
+
 ![image](https://user-images.githubusercontent.com/40329022/194472306-912160c4-b07a-456f-857b-75f161024be4.png)
 
 Swords/axes look for the tier before replacing
