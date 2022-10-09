@@ -16,6 +16,14 @@ object Config: Vigilant(File("./config/skywars-sorter.toml")) {
 
     @Property(
         type = PropertyType.SWITCH,
+        name = "Only Enable While In A Chest",
+        description = "Doesn't sort when you are in your inventory",
+        category = "Sorting"
+    )
+    var chestOnly = false
+
+    @Property(
+        type = PropertyType.SWITCH,
         name = "Enable In Skywars",
         description = "Enable In Skywars",
         category = "Sorting"

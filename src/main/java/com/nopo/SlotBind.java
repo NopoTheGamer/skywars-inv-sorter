@@ -32,6 +32,7 @@ public class SlotBind {
     @SubscribeEvent
     public void onWindowClick(SlotClickEvent slotClickEvent) {
         if (!shouldBeEnabled()) return;
+        if (SkywarsSorter.config.getChestOnly() && !(Minecraft.getMinecraft().currentScreen instanceof GuiChest)) return;
 
         LockedSlot locked = new LockedSlot(getSlotToBind(getSlotToBind(slotClickEvent.slot), slotClickEvent));
 
